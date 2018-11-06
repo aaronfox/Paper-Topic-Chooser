@@ -134,9 +134,11 @@ sorted_topics_tuple = ()
 sorted_number_words_tuple = ()
 
 # Put sorted_tuples list back into their respective tuples
+# Also filter out results that have < 1500 words
 for tup in sorted_tuples:
-    sorted_number_words_tuple = sorted_number_words_tuple + (tup[1],)
-    sorted_topics_tuple = sorted_topics_tuple + (tup[0],)
+    if (tup[1] >=1500):
+        sorted_number_words_tuple = sorted_number_words_tuple + (tup[1],)
+        sorted_topics_tuple = sorted_topics_tuple + (tup[0],)
 
 print(sorted_number_words_tuple)
 print(sorted_topics_tuple)
@@ -160,7 +162,7 @@ plt.xticks(y_pos, topics_tuple, fontname="monospace", fontsize=8)
 
 # Add # of words to top of each bar
 for a,b in zip(y_pos, number_words):
-    plt.text(a, b, str(number_words[a]), rotation=90)
+    plt.text(a - .25, b, str(number_words[a]), rotation=90) # the '- .25' centers the text on the bar
 
 plt.xticks(rotation=90)
 # Make Room for bottom text
