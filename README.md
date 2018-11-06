@@ -1,5 +1,5 @@
 # Paper-Topic-Chooser
-My guitar class assigned a long paper with over a hundred suggested options of topics/people related to the guitar. I'm going to choose the topic based on what Wikipedia says about them
+My guitar class assigned a long paper with over a hundred suggested options of topics/people related to the guitar. I'm going to choose the topic based on how much information is available to write and present on them. This will be based on how many words each respective topic's Wikipedia entry contains. (The more words, the merrier!)
 
 *Here are the results from the second version of the graph with each topic sorted and filtered for topics containing Wikipedia articles over 1499 words:*
 ![number of words for each topic s wikipedia article v2](https://user-images.githubusercontent.com/19690086/48087436-4eb79700-e1cd-11e8-8a8e-8467fec2c43b.png)
@@ -16,4 +16,4 @@ Based on the results and double-checking the Wikipedia pages, Benjamin Britten a
 - ~Filter tuples to only include numbers greater than a certain amount of words~
 - ~Fix whatever's causing some x-labels to be scooted too far to the left~
 - ~Show value of each bar at end of bar~
-- Verify the articlex are indubitably about the topic by matching the part of the topics with part of the URL link without having to manually verify this
+- Verify the articles are indubitably about the topic by matching the part of the topics with part of the URL link without having to manually verify this
