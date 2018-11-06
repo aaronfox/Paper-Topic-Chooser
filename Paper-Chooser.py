@@ -13,9 +13,8 @@ soup = BeautifulSoup(url.content, "lxml")
 # this separates out
 text_file = open("./guitar_paper_topics.txt", encoding="utf8")
 write_file = open("./edited_guitar_topics.txt", "w", encoding="utf8")
-print(text_file)
+# print(text_file)
 for line in text_file:
-    print(line)
     new_line = line.replace("§", "\n")
     if new_line[0] == ' ' or new_line[0] == '-':
         new_line = new_line[1:]
@@ -23,7 +22,6 @@ for line in text_file:
         new_line = new_line[1:]
     if new_line[0] == ' ' or new_line[0] == '-':
         new_line = new_line[1:]
-    print("new_line == " + new_line)
     write_file.write(new_line)
 text_file.close()
 write_file.close()
@@ -44,14 +42,31 @@ for line in read_file:
         index = index + 1
     if char_flag:
         write_file.write(line)
-    if line[0] == " ":
-        print("line[0] == \" \" where line == " + line + " and line[0] == \"" + line[0] + "\"")
-
 
 read_file.close()
 write_file.close()
 
+# Now that we have the properly edited guitar topics,
+# let's see which topics are the most popular on Wikipedia
+# Let's arbitrarily say that topics with the largest
+# Wikipedia articles are the ones with the most
+# overall information on the web and would
+# therefore be the easiest to write papers on
+
+topics_file = open("./new_edited_guitar_topics.txt", "r", encoding="utf8")
+
+go = True
+for line in topics_file:
+    if go == True:
+        print(line, end="")
+        # Obtain search URL
+        search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
+        soup = BeautifulSoup(search_url.content, "lxml")
+        search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
+        if search_result_url:
+            first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
+            print(first_link)
+        # go = False
 
 
-
-print('hello!')
+print('End of Paper-Chooser.py!')
