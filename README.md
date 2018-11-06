@@ -16,4 +16,4 @@ Based on the results and double-checking the Wikipedia pages, Benjamin Britten a
 - ~Filter tuples to only include numbers greater than a certain amount of words~
 - ~Fix whatever's causing some x-labels to be scooted too far to the left~
 - ~Show value of each bar at end of bar~
-- Verify the article are indubitably about the topic by matching the part of the topics with part of the URL link without having to manually verify this
+- Verify the articlex are indubitably about the topic by matching the part of the topics with part of the URL link without having to manually verify this
