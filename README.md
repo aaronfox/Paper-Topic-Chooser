@@ -7,13 +7,13 @@ My guitar class assigned a long paper with over a hundred suggested options of t
 ## Conclusion
 Based on the results and double-checking the Wikipedia pages, Benjamin Britten appears to have more information available for writing about him on the web than the other topics, barring the more ambiguous and open-ended "[t]he first single-string guitars: regional tendencies in France, German lands, and the Holy Roman Empire" which only yielded so many results because it redirected to the mandlolin. Thus, I will write this essay about Benjamin Britten and voyage into the long and arduous journey of learning all about this dashing English composer, conductor and pianist.
 
-*Here are the results from the first version of the graph *(which needs to be sorted and filtered to be made more readable)**
+*Here are the results from the first version of the graph *(which need to be sorted and filtered to be made more readable)**
 ![number of words for each topic s wikipedia article v1](https://user-images.githubusercontent.com/19690086/48050703-a1169a80-e170-11e8-831b-f725fedc2c5d.png)
 
 
 ## To-do:
--~ Sort tuples~ 
--~ Filter tuples to only include numbers greater than a certain amount of words~
--~ Fix whatever's causing some x-labels to be scooted too far to the left~
--~ Show value of each bar at end of bar~
-- Verify the article is truly about the topic by matching the part of the topics with part of the URL link
+- ~Sort tuples~ 
+- ~Filter tuples to only include numbers greater than a certain amount of words~
+- ~Fix whatever's causing some x-labels to be scooted too far to the left~
+- ~Show value of each bar at end of bar~
+- Verify the article are indubitably about the topic by matching the part of the topics with part of the URL link without having to manually verify this
