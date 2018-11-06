@@ -1,6 +1,8 @@
 #!python3
 import requests
 from bs4 import BeautifulSoup
+import unidecode
+# see https://pypi.org/project/Unidecode/
 
 # Obtain URLS
 url = requests.get("https://en.wikipedia.org/wiki/Petr_Eben")
@@ -35,6 +37,10 @@ for line in read_file:
     for char in line:
         if char.isalpha():
             char_flag = True
+        # Change special accents to closest ascii representation
+        # for ease of searching
+        # ref https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-in-a-python-unicode-string
+        line = unidecode.unidecode(line)
         # Get rid of leading spaces
         if char_flag == False:
             if char == " ":
@@ -57,16 +63,14 @@ topics_file = open("./new_edited_guitar_topics.txt", "r", encoding="utf8")
 
 go = True
 for line in topics_file:
-    if go == True:
-        print(line, end="")
-        # Obtain search URL
-        search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
-        soup = BeautifulSoup(search_url.content, "lxml")
-        search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
-        if search_result_url:
-            first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
-            print(first_link)
-        # go = False
+    print(line, end="")
+    # Obtain search URL
+    search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
+    soup = BeautifulSoup(search_url.content, "lxml")
+    search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
+    if search_result_url:
+        first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
+        print(first_link)
 
 
 print('End of Paper-Chooser.py!')
