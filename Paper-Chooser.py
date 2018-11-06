@@ -68,7 +68,7 @@ topics_file = open("./new_edited_guitar_topics.txt", "r", encoding="utf8")
 # count = 3
 topics_dict = {}
 for line in topics_file:
-    # if count < 5:
+    # if count < 8:
     print(line, end="")
     # Obtain search URL
     search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
@@ -90,7 +90,9 @@ for line in topics_file:
         topics_dict[line] = int(num_str)
         # print(search_result_data.text)
     else:
-        topics_dict[line] = 0
+        print(line[:-1] + ' is empty')
+        # Don't include empty results
+        # topics_dict[line] = 0
     # count = count + 1
 
 for key,val in topics_dict.items():
@@ -98,6 +100,11 @@ for key,val in topics_dict.items():
 
 keys_tuple = ()
 for key in topics_dict.keys():
+    # Only use first 10 chars to make the plot more readable and consistent
+    if len(key) >= 18:
+        key = key[:18] + "..."
+    else:
+        key = key[:-1]
     keys_tuple = keys_tuple + (key,)
 
 vals_tuple = ()
@@ -107,12 +114,26 @@ for val in topics_dict.values():
 objects = keys_tuple
 y_pos = np.arange(len(objects))
 performance = vals_tuple
+
+# import matplotlib.pyplot as plt
+# import random
+
+# x = range(13)
+# y = [random.randrange(100) for _ in range(13)]
+# plt.bar(x, y)
+# for a,b in zip(x, y):
+#     plt.text(a, b, str(a))
+# plt.show()
  
-plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.bar(y_pos, performance, align='center', alpha=0.8, color='chartreuse')
 plt.xticks(y_pos, objects)
-plt.ylabel('Usage')
-plt.title('Programming language usage')
- 
+plt.xticks(rotation=90)
+# Make Room for bottom text
+plt.tight_layout()
+plt.ylabel('Number of Words', fontname="monospace")
+plt.xlabel('Topic', fontname="monospace")
+
+plt.title('Number of Words for Each Topic\'s Wikipedia Article')
 plt.show()
 
 print('End of Paper-Chooser.py!')
