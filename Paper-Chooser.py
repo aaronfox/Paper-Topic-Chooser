@@ -2,6 +2,9 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 import unidecode
 # see https://pypi.org/project/Unidecode/
 
@@ -62,25 +65,54 @@ write_file.close()
 
 topics_file = open("./new_edited_guitar_topics.txt", "r", encoding="utf8")
 
-count = 0
+# count = 3
+topics_dict = {}
 for line in topics_file:
-    if count < 5:
-        print(line, end="")
-        # Obtain search URL
-        search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
-        soup = BeautifulSoup(search_url.content, "lxml")
-        search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
-        search_result_data = soup.find("div", {"class":"mw-search-result-data"})
-        if search_result_url:
-            first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
-            # print(first_link, end='')
-            # Use regex to extract number of words for the entry
-            regex = re.compile(r"\((.*) words\)")
-            print(search_result_data.text);
-            regex_result = regex.search(search_result_data.text)
-            print(regex_result.group())
-            # print(search_result_data.text)
-    count = count + 1
+    # if count < 5:
+    print(line, end="")
+    # Obtain search URL
+    search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
+    soup = BeautifulSoup(search_url.content, "lxml")
+    search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
+    search_result_data = soup.find("div", {"class":"mw-search-result-data"})
+    if search_result_url:
+        first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
+        # print(first_link, end='')
+        # Use regex to extract number of words for the entry
+        regex = re.compile(r"\((.*) words\)")
+        print(search_result_data.text);
+        regex_result = regex.search(search_result_data.text)
+        print(regex_result.group(1))
+        # Replace commas with 
+        num_str = regex_result.group(1)
+        num_str = num_str.replace(',', '')
+        print(num_str)
+        topics_dict[line] = int(num_str)
+        # print(search_result_data.text)
+    else:
+        topics_dict[line] = 0
+    # count = count + 1
 
+for key,val in topics_dict.items():
+    print(key[:-1] + ": " + str(val))
+
+keys_tuple = ()
+for key in topics_dict.keys():
+    keys_tuple = keys_tuple + (key,)
+
+vals_tuple = ()
+for val in topics_dict.values():
+    vals_tuple = vals_tuple + (val,)
+
+objects = keys_tuple
+y_pos = np.arange(len(objects))
+performance = vals_tuple
+ 
+plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.xticks(y_pos, objects)
+plt.ylabel('Usage')
+plt.title('Programming language usage')
+ 
+plt.show()
 
 print('End of Paper-Chooser.py!')
