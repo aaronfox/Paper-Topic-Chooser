@@ -106,7 +106,7 @@ for key in topics_dict.keys():
     if len(key) >= 18:
         key = key[:18].strip('\n') + "..."
     else:
-        key = key[:-1]
+        key = key[:].strip('\n')
     print(key)
     keys_tuple = keys_tuple + (key.strip('\n'),)
 
@@ -114,9 +114,36 @@ vals_tuple = ()
 for val in topics_dict.values():
     vals_tuple = vals_tuple + (val,)
 
-objects = keys_tuple
-y_pos = np.arange(len(objects))
-performance = vals_tuple
+topics_tuple = keys_tuple
+y_pos = np.arange(len(topics_tuple))
+number_words = vals_tuple
+
+# Combine tuples into groups of tuples and sort
+combined_tuples = []
+
+for x,y in zip(number_words,topics_tuple):
+    combined_tuples.append((y, x))
+    print(y + " : " + str(x))
+
+print(combined_tuples)
+
+sorted_tuples = sorted(combined_tuples, key=lambda tup:tup[1])
+print(sorted_tuples)
+
+sorted_topics_tuple = ()
+sorted_number_words_tuple = ()
+
+# Put sorted_tuples list back into their respective tuples
+for tup in sorted_tuples:
+    sorted_number_words_tuple = sorted_number_words_tuple + (tup[1],)
+    sorted_topics_tuple = sorted_topics_tuple + (tup[0],)
+
+print(sorted_number_words_tuple)
+print(sorted_topics_tuple)
+
+topics_tuple = sorted_topics_tuple
+y_pos = np.arange(len(topics_tuple))
+number_words = sorted_number_words_tuple
 
 # import matplotlib.pyplot as plt
 # import random
@@ -127,9 +154,14 @@ performance = vals_tuple
 # for a,b in zip(x, y):
 #     plt.text(a, b, str(a))
 # plt.show()
- 
-plt.bar(y_pos, performance, align='center', alpha=0.8, color='chartreuse')
-plt.xticks(y_pos, objects)
+
+plt.bar(y_pos, number_words, align='center', alpha=0.8, color='chartreuse')
+plt.xticks(y_pos, topics_tuple, fontname="monospace", fontsize=8)
+
+# Add # of words to top of each bar
+for a,b in zip(y_pos, number_words):
+    plt.text(a, b, str(number_words[a]), rotation=90)
+
 plt.xticks(rotation=90)
 # Make Room for bottom text
 plt.tight_layout()
