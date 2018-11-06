@@ -9,3 +9,4 @@ Here are the results from the first version of the *(needs to be sorted and filt
 - Sort tuples 
 - Filter tuples to only include numbers greater than a certain amount of words
 - Fix whatever's causing some x-labels to be scooted too far to the left
+- Show value of each bar at end of bar
