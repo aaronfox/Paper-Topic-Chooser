@@ -1,6 +1,7 @@
 #!python3
 import requests
 from bs4 import BeautifulSoup
+import re
 import unidecode
 # see https://pypi.org/project/Unidecode/
 
@@ -61,16 +62,25 @@ write_file.close()
 
 topics_file = open("./new_edited_guitar_topics.txt", "r", encoding="utf8")
 
-go = True
+count = 0
 for line in topics_file:
-    print(line, end="")
-    # Obtain search URL
-    search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
-    soup = BeautifulSoup(search_url.content, "lxml")
-    search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
-    if search_result_url:
-        first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
-        print(first_link)
+    if count < 5:
+        print(line, end="")
+        # Obtain search URL
+        search_url = requests.get("https://en.wikipedia.org/w/index.php?search=" + line)
+        soup = BeautifulSoup(search_url.content, "lxml")
+        search_result_url = soup.find("div", {"class":"mw-search-result-heading"})
+        search_result_data = soup.find("div", {"class":"mw-search-result-data"})
+        if search_result_url:
+            first_link = 'https://en.wikipedia.org' + search_result_url.find('a')['href']
+            # print(first_link, end='')
+            # Use regex to extract number of words for the entry
+            regex = re.compile(r"\((.*) words\)")
+            print(search_result_data.text);
+            regex_result = regex.search(search_result_data.text)
+            print(regex_result.group())
+            # print(search_result_data.text)
+    count = count + 1
 
 
 print('End of Paper-Chooser.py!')
