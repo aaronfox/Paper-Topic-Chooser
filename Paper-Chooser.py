@@ -9,52 +9,52 @@ import unidecode
 # see https://pypi.org/project/Unidecode/
 
 # Obtain URLS
-url = requests.get("https://en.wikipedia.org/wiki/Petr_Eben")
-# use https://en.wikipedia.org/wiki/Special:Search?search=Petr+Eben+1929 for searching
-# then use first url
-soup = BeautifulSoup(url.content, "lxml")
-# print(soup)
+# url = requests.get("https://en.wikipedia.org/wiki/Petr_Eben")
+# # use https://en.wikipedia.org/wiki/Special:Search?search=Petr+Eben+1929 for searching
+# # then use first url
+# soup = BeautifulSoup(url.content, "lxml")
+# # print(soup)
 
-# The following was specific for editing my topics paper
-# this separates out
-text_file = open("./guitar_paper_topics.txt", encoding="utf8")
-write_file = open("./edited_guitar_topics.txt", "w", encoding="utf8")
-# print(text_file)
-for line in text_file:
-    new_line = line.replace("§", "\n")
-    if new_line[0] == ' ' or new_line[0] == '-':
-        new_line = new_line[1:]
-    if new_line[0] == ' ' or new_line[0] == '-':
-        new_line = new_line[1:]
-    if new_line[0] == ' ' or new_line[0] == '-':
-        new_line = new_line[1:]
-    write_file.write(new_line)
-text_file.close()
-write_file.close()
+# # The following was specific for editing my topics paper
+# # this separates out
+# text_file = open("./guitar_paper_topics.txt", encoding="utf8")
+# write_file = open("./edited_guitar_topics.txt", "w", encoding="utf8")
+# # print(text_file)
+# for line in text_file:
+#     new_line = line.replace("§", "\n")
+#     if new_line[0] == ' ' or new_line[0] == '-':
+#         new_line = new_line[1:]
+#     if new_line[0] == ' ' or new_line[0] == '-':
+#         new_line = new_line[1:]
+#     if new_line[0] == ' ' or new_line[0] == '-':
+#         new_line = new_line[1:]
+#     write_file.write(new_line)
+# text_file.close()
+# write_file.close()
 
-# Eliminate empty lines
-read_file = open("edited_guitar_topics.txt", "r", encoding="utf8")
-write_file = open("./new_edited_guitar_topics.txt", "w", encoding="utf8")
-for line in read_file:
-    char_flag = False
-    index = 0
-    for char in line:
-        if char.isalpha():
-            char_flag = True
-        # Change special accents to closest ascii representation
-        # for ease of searching
-        # ref https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-in-a-python-unicode-string
-        line = unidecode.unidecode(line)
-        # Get rid of leading spaces
-        if char_flag == False:
-            if char == " ":
-                line = line[0:index] + line[index + 1:]
-        index = index + 1
-    if char_flag:
-        write_file.write(line)
+# # Eliminate empty lines
+# read_file = open("edited_guitar_topics.txt", "r", encoding="utf8")
+# write_file = open("./new_edited_guitar_topics.txt", "w", encoding="utf8")
+# for line in read_file:
+#     char_flag = False
+#     index = 0
+#     for char in line:
+#         if char.isalpha():
+#             char_flag = True
+#         # Change special accents to closest ascii representation
+#         # for ease of searching
+#         # ref https://stackoverflow.com/questions/517923/what-is-the-best-way-to-remove-accents-in-a-python-unicode-string
+#         line = unidecode.unidecode(line)
+#         # Get rid of leading spaces
+#         if char_flag == False:
+#             if char == " ":
+#                 line = line[0:index] + line[index + 1:]
+#         index = index + 1
+#     if char_flag:
+#         write_file.write(line)
 
-read_file.close()
-write_file.close()
+# read_file.close()
+# write_file.close()
 
 # Now that we have the properly edited guitar topics,
 # let's see which topics are the most popular on Wikipedia
@@ -80,13 +80,13 @@ for line in topics_file:
         # print(first_link, end='')
         # Use regex to extract number of words for the entry
         regex = re.compile(r"\((.*) words\)")
-        print(search_result_data.text);
+        # print(search_result_data.text);
         regex_result = regex.search(search_result_data.text)
-        print(regex_result.group(1))
+        # print(regex_result.group(1))
         # Replace commas with 
         num_str = regex_result.group(1)
         num_str = num_str.replace(',', '')
-        print(num_str)
+        # print(num_str)
         topics_dict[line] = int(num_str)
         # print(search_result_data.text)
     else:
@@ -95,17 +95,20 @@ for line in topics_file:
         # topics_dict[line] = 0
     # count = count + 1
 
-for key,val in topics_dict.items():
-    print(key[:-1] + ": " + str(val))
+topics_file.close()
+
+# for key,val in topics_dict.items():
+#     print(key[:-1] + ": " + str(val))
 
 keys_tuple = ()
 for key in topics_dict.keys():
     # Only use first 10 chars to make the plot more readable and consistent
     if len(key) >= 18:
-        key = key[:18] + "..."
+        key = key[:18].strip('\n') + "..."
     else:
         key = key[:-1]
-    keys_tuple = keys_tuple + (key,)
+    print(key)
+    keys_tuple = keys_tuple + (key.strip('\n'),)
 
 vals_tuple = ()
 for val in topics_dict.values():
