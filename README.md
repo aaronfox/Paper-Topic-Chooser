@@ -1,6 +1,8 @@
 # Paper-Topic-Chooser
 My guitar class assigned a long paper with over a hundred suggested options of topics/people related to the guitar. I'm going to choose the topic based on how much information is available to write and present on them. This will be based on how many words each respective topic's Wikipedia entry contains. (The more words, the merrier!)
 
+If you're curious as to how the paper is turning out: you can see my current writing process of it [here](https://docs.google.com/document/d/1STtAsWL6yahJ9qyyT1yxSFRrgQPVb716bAJjeUkqOyI/edit?usp=sharing).
+
 *Here are the results from the second version of the graph with each topic sorted and filtered for topics containing Wikipedia articles over 1499 words:*
 ![number of words for each topic s wikipedia article v2](https://user-images.githubusercontent.com/19690086/48087436-4eb79700-e1cd-11e8-8a8e-8467fec2c43b.png)
 
