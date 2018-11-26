@@ -7,7 +7,7 @@ If you're curious as to how the paper is turning out, you can see my current wri
 ![number of words for each topic's wikipedia article v2](https://user-images.githubusercontent.com/19690086/48087436-4eb79700-e1cd-11e8-8a8e-8467fec2c43b.png)
 
 ## Conclusion
-Based on the results and double-checking the Wikipedia pages, Benjamin Britten appears to have more information available for writing about him on the web than the other topics, barring the more ambiguous and open-ended "[t]he first single-string guitars: regional tendencies in France, German lands, and the Holy Roman Empire" which only yielded so many results because it redirected to the mandlolin. Thus, I will write this essay about Benjamin Britten and voyage into the long and arduous journey of learning all about this dashing English composer, conductor and pianist.
+Based on the results and double-checking the Wikipedia pages, Benjamin Britten appears to have more information available for writing about him on the web than the other topics, barring the more ambiguous and open-ended "[t]he first single-string guitars: regional tendencies in France, German lands, and the Holy Roman Empire" which only yielded so many results because it redirected to the mandlolin. Thus, I will write this essay about Benjamin Britten and voyage into the long and arduous journey of learning all about this fascinating English composer, conductor and pianist.
 
 *Here are the results from the first version of the graph *(which need to be sorted and filtered to be made more readable)**
 ![number of words for each topic's wikipedia article v1](https://user-images.githubusercontent.com/19690086/48050703-a1169a80-e170-11e8-831b-f725fedc2c5d.png)
